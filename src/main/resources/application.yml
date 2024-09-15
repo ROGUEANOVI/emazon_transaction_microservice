@@ -28,3 +28,9 @@ security:
   jwt:
     secret-key: ${JWT_SECRET_KEY}
     issuer: ${JWT_ISSUER}
+
+feign:
+  client:
+    article-service:
+      name: article-service
+      url: http://localhost:8081/api/v1/articles
