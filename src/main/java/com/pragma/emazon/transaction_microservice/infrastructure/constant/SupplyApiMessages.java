@@ -17,9 +17,11 @@ public class SupplyApiMessages {
 
     public static final String DESCRIPTION_400 = "Supply bad request";
 
-    public static final String DESCRIPTION_409 = "Article already exists";
+    public static final String DESCRIPTION_403 = "Denied access";
 
-    public static final String SUMMARY_ADD_SUPPLY = "Create new article";
+    public static final String DESCRIPTION_404 = "Article to supply not found";
+
+    public static final String SUMMARY_ADD_SUPPLY = "Add new supply";
 
     public static final String DESCRIPTION_ADD_SUPPLY = "Rest method for creating supply";
 }

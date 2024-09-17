@@ -10,8 +10,6 @@ public class Supply {
 
     private Integer quantity;
 
-    private String status;
-
     private Long createdByUserId;
 
     private LocalDateTime supplyDate;
@@ -20,12 +18,11 @@ public class Supply {
 
     }
 
-    public Supply(Long id, Long articleId, Integer quantity, String status, Long createdByUserId, LocalDateTime supplyDate) {
+    public Supply(Long id, Long articleId, Integer quantity, Long createdByUserId, LocalDateTime supplyDate) {
 
         this.id = id;
         this.articleId = articleId;
         this.quantity = quantity;
-        this.status = status;
         this.createdByUserId = createdByUserId;
         this.supplyDate = supplyDate;
     }
@@ -58,16 +55,6 @@ public class Supply {
     public void setQuantity(Integer quantity) {
 
         this.quantity = quantity;
-    }
-
-    public String getStatus() {
-
-        return status;
-    }
-
-    public void setStatus(String status) {
-
-        this.status = status;
     }
 
     public Long getCreatedByUserId() {

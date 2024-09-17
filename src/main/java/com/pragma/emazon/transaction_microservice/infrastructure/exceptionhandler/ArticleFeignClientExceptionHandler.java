@@ -1,10 +1,12 @@
 package com.pragma.emazon.transaction_microservice.infrastructure.exceptionhandler;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pragma.emazon.transaction_microservice.domain.constant.GlobalMessages;
 import com.pragma.emazon.transaction_microservice.domain.exception.ArticleBadRequestException;
 import com.pragma.emazon.transaction_microservice.domain.exception.ArticleInternalServerErrorException;
 import com.pragma.emazon.transaction_microservice.domain.exception.ArticleNotFoundException;
-import feign.FeignException;
+import feign.RetryableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,27 +17,29 @@ import java.util.Map;
 @ControllerAdvice
 public class ArticleFeignClientExceptionHandler {
 
-    @ExceptionHandler(FeignException.class)
-    public ResponseEntity<Map<String, String>> handleFeignClientException(FeignException ex) {
-
-        return ResponseEntity.status(ex.status()).body(Map.of(GlobalMessages.MESSAGE, ex.getMessage()));
-    }
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @ExceptionHandler(ArticleBadRequestException.class)
-    public ResponseEntity<Map<String, String>> handleArticleBadRequestException(ArticleBadRequestException ex) {
+    public ResponseEntity<Object> handleArticleBadRequestException(ArticleBadRequestException ex) throws JsonProcessingException {
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(GlobalMessages.MESSAGE, ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(objectMapper.readValue(ex.getMessage(), Map.class));
     }
 
     @ExceptionHandler(ArticleNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleArticleNotFoundException(ArticleNotFoundException ex) {
+    public ResponseEntity<Object> handleArticleNotFoundException(ArticleNotFoundException ex) throws JsonProcessingException {
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(GlobalMessages.MESSAGE, ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(objectMapper.readValue(ex.getMessage(), Map.class));
     }
 
     @ExceptionHandler(ArticleInternalServerErrorException.class)
-    public ResponseEntity<Map<String, String>> handleArticleInternalServerErrorException(ArticleInternalServerErrorException ex) {
+    public ResponseEntity<Object> handleArticleInternalServerErrorException(ArticleInternalServerErrorException ex) throws JsonProcessingException {
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(GlobalMessages.MESSAGE, ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(objectMapper.readValue(ex.getMessage(), Map.class));
+    }
+
+    @ExceptionHandler(RetryableException.class)
+    public ResponseEntity<Map<String, String>> handleRetryableException(RetryableException ex) {
+
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(Map.of(GlobalMessages.MESSAGE, ex.getMessage()));
     }
 }

@@ -10,7 +10,5 @@ public class AuthorizeMessages {
 
     public static final String DENY_ALL = "denyAll()";
 
-    public static final String PERMIT_ALL = "permitAll()";
-
-    public static final String HAS_ROLE_ROLE_WAREHOUSE_ASSISTANT = "hasRole('ROLE_WAREHOUSE_ASSISTANT')";
+    public static final String HAS_ROLE_WAREHOUSE_ASSISTANT = "hasRole('ROLE_WAREHOUSE_ASSISTANT')";
 }
