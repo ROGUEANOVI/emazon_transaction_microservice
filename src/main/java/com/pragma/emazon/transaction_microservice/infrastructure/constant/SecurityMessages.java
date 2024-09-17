@@ -14,5 +14,7 @@ public class SecurityMessages {
 
     public static final String TOKEN_EXPIRED = "Invalid token, token expired";
 
+    public static final String ACCESS_DENIED = "Access denied";
+
     public static final String USER_ID = "userId";
 }

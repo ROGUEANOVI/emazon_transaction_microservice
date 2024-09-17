@@ -2,7 +2,6 @@ package com.pragma.emazon.transaction_microservice.infrastructure.in.rest;
 
 import com.pragma.emazon.transaction_microservice.application.dto.request.AddSupplyRequest;
 import com.pragma.emazon.transaction_microservice.application.handler.ISupplyHandler;
-import com.pragma.emazon.transaction_microservice.application.handler.SupplyHandler;
 import com.pragma.emazon.transaction_microservice.infrastructure.constant.AuthorizeMessages;
 import com.pragma.emazon.transaction_microservice.infrastructure.constant.OpenApiMessages;
 import com.pragma.emazon.transaction_microservice.infrastructure.constant.SupplyApiMessages;
@@ -35,9 +34,10 @@ public class SupplyRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = OpenApiMessages.CODE_201, description = DESCRIPTION_201, content = @Content),
             @ApiResponse(responseCode = OpenApiMessages.CODE_400, description = DESCRIPTION_400, content = @Content),
-            @ApiResponse(responseCode = OpenApiMessages.CODE_409, description = DESCRIPTION_409, content = @Content)
+            @ApiResponse(responseCode = OpenApiMessages.CODE_403, description = DESCRIPTION_403, content = @Content),
+            @ApiResponse(responseCode = OpenApiMessages.CODE_404, description = DESCRIPTION_404, content = @Content),
     })
-    @PreAuthorize(AuthorizeMessages.HAS_ROLE_ROLE_WAREHOUSE_ASSISTANT)
+    @PreAuthorize(AuthorizeMessages.HAS_ROLE_WAREHOUSE_ASSISTANT)
     @PostMapping
     public ResponseEntity<Void> addSupply(@RequestBody AddSupplyRequest addSupplyRequest) {
 

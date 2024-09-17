@@ -13,8 +13,6 @@ public class SupplyTableFields {
 
     public static final String FIELD_QUANTITY = "quantity";
 
-    public static final String FIELD_STATUS = "status";
-
     public static final String FIELD_CREATED_BY_USER_ID = "created_by_user_id";
 
     public static final String FIELD_SUPPLY_DATE = "supply_date";

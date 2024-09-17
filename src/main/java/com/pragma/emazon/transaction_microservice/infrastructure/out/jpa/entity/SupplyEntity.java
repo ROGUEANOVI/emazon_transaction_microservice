@@ -26,9 +26,6 @@ public class SupplyEntity {
     @Column(name = FIELD_QUANTITY)
     private Integer quantity;
 
-    @Column(name = FIELD_STATUS)
-    private String status;
-
     @Column(name = FIELD_CREATED_BY_USER_ID)
     private Long createdByUserId;
 

@@ -2,8 +2,8 @@ package com.pragma.emazon.transaction_microservice.domain.exception;
 
 public class ArticleNotFoundException extends RuntimeException {
 
-    public ArticleNotFoundException(String message, Long articleId) {
+    public ArticleNotFoundException(String message) {
 
-        super(String.format(message, articleId));
+        super(message);
     }
 }
